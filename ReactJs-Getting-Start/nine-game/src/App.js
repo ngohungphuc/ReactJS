@@ -4,14 +4,12 @@ import './App.css';
 var _ = require('lodash');
 
 const Stars = (props) => {
-  const numberOfStars = Math.floor(Math.random() * 9);
-
   return (
     <div className="col-md-5">
       {_
-        .range(numberOfStars)
+        .range(props.numberOfStars)
         .map(i => <i key={i} className="fa fa-star"></i>)
-      }
+}
     </div>
   )
 }
@@ -47,7 +45,10 @@ const Numbers = (props) => {
       <div>
         {Numbers
           .list
-          .map((number, i) => <span key={i} className={numberClassName(number)}>{number}</span>)}
+          .map((number, i) => <span
+            key={i}
+            className={numberClassName(number)}
+            onClick={() => props.selectNumber(number)}>{number}</span>)}
       </div>
     </div>
   )
@@ -57,20 +58,33 @@ Numbers.list = _.range(1, 10);
 
 class Game extends Component {
   state = {
-    selectedNumbers: [2, 4]
+    selectedNumbers: [],
+    numberOfStars: Math.floor(Math.random() * 9)
   };
+
+  selectNumber = (clickedNumber) => {
+    if (this.state.selectedNumbers.indexOf(clickedNumber) >= 0) 
+      return;
+    this.setState(prevState => ({
+      selectedNumbers: prevState
+        .selectedNumbers
+        .concat(clickedNumber)
+    }));
+  }
 
   render() {
     return (
       <div>
         <h3>Play nine</h3>
         <div className="row">
-          <Stars/>
+          <Stars numberOfStars={this.state.numberOfStars}/>
           <Button/>
           <Answer selectedNumbers={this.state.selectedNumbers}/>
         </div>
         <br/>
-        <Numbers selectedNumbers={this.state.selectedNumbers}/>
+        <Numbers
+          selectedNumbers={this.state.selectedNumbers}
+          selectNumber={this.selectNumber}/>
       </div>
     );
   }
