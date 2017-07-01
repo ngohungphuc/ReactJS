@@ -29,7 +29,7 @@ const Answer = (props) => {
     <div className="col-md-5">
       {props
         .selectedNumbers
-        .map((number, i) => <span key={i}>{number}</span>)}
+        .map((number, i) => <span key={i} onClick={() => props.unselectNumber(number)}>{number}</span>)}
     </div>
   )
 }
@@ -72,6 +72,14 @@ class Game extends Component {
     }));
   }
 
+  //filter out number that match clicked number
+  unselectNumber = (clickedNumber) => {
+    this.setState(prevState => ({
+      selectedNumbers: prevState
+        .selectedNumbers
+        .filter(number => number !== clickedNumber)
+    }))
+  }
   render() {
     return (
       <div>
@@ -79,7 +87,9 @@ class Game extends Component {
         <div className="row">
           <Stars numberOfStars={this.state.numberOfStars}/>
           <Button/>
-          <Answer selectedNumbers={this.state.selectedNumbers}/>
+          <Answer
+            selectedNumbers={this.state.selectedNumbers}
+            unselectNumber={this.unselectNumber}/>
         </div>
         <br/>
         <Numbers
