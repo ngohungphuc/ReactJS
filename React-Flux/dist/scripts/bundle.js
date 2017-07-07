@@ -45350,28 +45350,29 @@ module.exports = AuthorPage;
 "use strict";
 
 var React = require('react');
-
+var Router = require('react-router');
+var Link = Router.Link;
 var Header = React.createClass({displayName: "Header",
-	render: function() {
-		return (
-        React.createElement("nav", {className: "navbar navbar-default"}, 
-          React.createElement("div", {className: "container-fluid"}, 
-              React.createElement("a", {href: "/", className: "navbar-brand"}, 
-                React.createElement("img", {src: "images/pluralsight-logo.png"})
-              ), 
-              React.createElement("ul", {className: "nav navbar-nav"}, 
-                React.createElement("li", null, React.createElement("a", {href: "/"}, "Home")), 
-                React.createElement("li", null, React.createElement("a", {href: "/#authors"}, "Authors")), 
-                React.createElement("li", null, React.createElement("a", {href: "/#about"}, "About"))
-              )
+  render: function () {
+    return (
+      React.createElement("nav", {className: "navbar navbar-default"}, 
+        React.createElement("div", {className: "container-fluid"}, 
+          React.createElement(Link, {to: "app", className: "navbar-brand"}, 
+            React.createElement("img", {src: "images/pluralsight-logo.png"})
+          ), 
+          React.createElement("ul", {className: "nav navbar-nav"}, 
+            React.createElement("li", null, React.createElement(Link, {to: "app"}, "Home")), 
+            React.createElement("li", null, React.createElement(Link, {to: "authors"}, "Authors")), 
+            React.createElement("li", null, React.createElement(Link, {to: "about"}, "About"))
           )
         )
-		);
-	}
+      )
+    );
+  }
 });
 
 module.exports = Header;
-},{"react":200}],208:[function(require,module,exports){
+},{"react":200,"react-router":30}],208:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
