@@ -45232,6 +45232,22 @@ module.exports = {
 var React = require('react');
 
 var About = React.createClass({displayName: "About",
+	statics: {
+		willTransitionTo: function (transition, params, query, callback) {
+			if (!confirm('Are you sure you want to read a page that\'s this boring?')) {
+				transition.about();
+			} else {
+				//call the callback allow transition to occur
+				callback();
+			}
+		},
+
+		willTransitionFrom: function (transition, component) {
+			if (!confirm('Are you sure you want to leave a page that\'s this exciting?')) {
+				transition.about();
+			}
+		}
+	},
 	render: function () {
 		return (
 			React.createElement("div", null, 
@@ -45378,7 +45394,7 @@ module.exports = Header;
 var React = require('react');
 
 var Home = React.createClass({displayName: "Home",
-	render: function() {
+	render: function () {
 		return (
 			React.createElement("div", {className: "jumbotron"}, 
 				React.createElement("h1", null, "Pluralsight Administration"), 
@@ -45394,6 +45410,25 @@ module.exports = Home;
 "use strict";
 
 var React = require('react');
+var Link = require('react-router').Link;
+
+var NotFoundPage = React.createClass({displayName: "NotFoundPage",
+    render: function () {
+        return (
+            React.createElement("div", {className: "jumbotron"}, 
+                React.createElement("p", null, "Page not found "), 
+                React.createElement(Link, {to: "app"}, "Back to Home page")
+            )
+        );
+    }
+});
+
+module.exports = NotFoundPage;
+
+},{"react":200,"react-router":30}],210:[function(require,module,exports){
+"use strict";
+
+var React = require('react');
 var Router = require('react-router');
 var routes = require('./route');
 
@@ -45401,7 +45436,7 @@ Router.run(routes, function (Handler) {
 	React.render(React.createElement(Handler, null), document.getElementById('app'));
 });
 
-},{"./route":210,"react":200,"react-router":30}],210:[function(require,module,exports){
+},{"./route":211,"react":200,"react-router":30}],211:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -45409,16 +45444,17 @@ var React = require('react');
 var Router = require('react-router');
 var DefaultRoute = Router.DefaultRoute;
 var Route = Router.Route;
-
+var NotFoundRoute = Router.NotFoundRoute;
 var routes = (
     React.createElement(Route, {name: "app", path: "/", handler: require('./components/app')}, 
         React.createElement(DefaultRoute, {handler: require('./components/homePage')}), 
         React.createElement(Route, {name: "authors", handler: require('./components/authors/authorPage')}), 
-        React.createElement(Route, {name: "about", handler: require('./components/about/aboutPage')})
+        React.createElement(Route, {name: "about", handler: require('./components/about/aboutPage')}), 
+        React.createElement(NotFoundRoute, {handler: require('./components/notFoundPage')})
     )
 );
 
 
 module.exports = routes;
 
-},{"./components/about/aboutPage":203,"./components/app":204,"./components/authors/authorPage":206,"./components/homePage":208,"react":200,"react-router":30}]},{},[209]);
+},{"./components/about/aboutPage":203,"./components/app":204,"./components/authors/authorPage":206,"./components/homePage":208,"./components/notFoundPage":209,"react":200,"react-router":30}]},{},[210]);
