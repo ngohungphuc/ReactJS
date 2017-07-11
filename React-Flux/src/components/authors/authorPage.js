@@ -1,9 +1,10 @@
 "use strict";
 
 var React = require('react');
+var Router = require('react-router');
+var Link = require('react-router').Link;
 var AuthorApi = require('../../api/authorApi');
 var AuthorList = require('./authorList');
-var Link = require('react-router').Link;
 
 var AuthorPage = React.createClass({
 	getInitialState: function() {
