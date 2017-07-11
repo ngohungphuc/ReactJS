@@ -3,7 +3,7 @@
  * @Author: Tony Hudson
  * @Contact: github.com/ngohungphuc
  * @Last Modified By: Tony Hudson
- * @Last Modified Time: Jul 11, 2017 11:10 PM
+ * @Last Modified Time: Jul 11, 2017 11:36 PM
  * @Description: Modify Here, Please
  */
 
@@ -16,7 +16,7 @@ var AuthorActions = {
     createAuthor: function (author) {
         var newAuthor = AuthorApi.saveAuthor(author);
         //tell all the stores that an author was just created
-        Dispatcher.dispatch({actionType: ActionTypes.CREATE_AUTHOR, atuhor: newAuthor})
+        Dispatcher.dispatch({actionType: ActionTypes.CREATE_AUTHOR, author: newAuthor})
     }
 };
 

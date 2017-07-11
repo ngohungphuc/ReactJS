@@ -3,7 +3,7 @@
  * @Author: Tony Hudson
  * @Contact: github.com/ngohungphuc
  * @Last Modified By: Tony Hudson
- * @Last Modified Time: Jul 11, 2017 11:29 PM
+ * @Last Modified Time: Jul 11, 2017 11:39 PM
  * @Description: Modify Here, Please
  */
 
@@ -13,7 +13,9 @@ var Dispatcher = require('../dispatcher/appDispatcher');
 var ActionTypes = require('../constants/actionType');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
+var _ = require('lodash');
 var CHANGE_EVENT = 'change';
+var _authors = [];
 
 var AuthorStore = assign({}, EventEmitter.prototype, {
     addChangeListener: function (callback) {
@@ -26,5 +28,25 @@ var AuthorStore = assign({}, EventEmitter.prototype, {
 
     emitChange: function () {
         this.emit(CHANGE_EVENT);
+    },
+
+    getAllAuthors: function () {
+        return _authors;
+    },
+
+    getAuthorById: function (id) {
+        return _.find(_authors, {id: id});
     }
 });
+
+Dispatcher.register(function (action) {
+    switch (action.actionTypes) {
+        case
+            ActionTypes.CREATE_AUTHOR:
+            _authors.push(action.atuhor);
+            AuthorStore.emitChange();
+            break;
+    }
+});
+
+module.exports = AuthorStore;
