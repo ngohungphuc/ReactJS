@@ -1,9 +1,18 @@
+/*
+ * @CreateTime: Jul 11, 2017 11:46 PM
+ * @Author: Tony Hudson
+ * @Contact: github.com/ngohungphuc
+ * @Last Modified By: Tony Hudson
+ * @Last Modified Time: Jul 11, 2017 11:49 PM
+ * @Description: Modify Here, Please 
+ */
 "use strict";
 
 var React = require('react');
 var Router = require('react-router');
 var AuthorForm = require('./authorForm');
-var AuthorApi = require('../../api/authorApi');
+var AuthorActions = require('../../actions/authorAction');
+var AuthorStore = require('../../stores/authorStore');
 var toastr = require('toastr');
 
 var ManageAuthorPage = React.createClass({
@@ -31,7 +40,7 @@ var ManageAuthorPage = React.createClass({
 		var authorId = this.props.params.id; //from the path '/author:id'
 
 		if (authorId) {
-			this.setState({author: AuthorApi.getAuthorById(authorId) });
+			this.setState({author: AuthorStore.getAuthorById(authorId) });
 		}
 	},
 
@@ -68,7 +77,7 @@ var ManageAuthorPage = React.createClass({
 			return;
 		}
 
-		AuthorApi.saveAuthor(this.state.author);
+		AuthorActions.createAuthor(this.state.author);
 		this.setState({dirty: false});
 		toastr.success('Author saved.');
 		this.transitionTo('authors');
