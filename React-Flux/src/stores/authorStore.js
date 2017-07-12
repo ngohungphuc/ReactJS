@@ -3,7 +3,7 @@
  * @Author: Tony Hudson
  * @Contact: github.com/ngohungphuc
  * @Last Modified By: Tony Hudson
- * @Last Modified Time: Jul 12, 2017 9:03 PM
+ * @Last Modified Time: Jul 12, 2017 9:07 PM
  * @Description: Modify Here, Please
  */
 
@@ -44,6 +44,7 @@ Dispatcher.register(function (action) {
         case ActionTypes.INITIALIZE:
             _authors = action.initialData.authors;
             AuthorStore.emitChange();
+            break;
         case ActionTypes.CREATE_AUTHOR:
             _authors.push(action.atuhor);
             AuthorStore.emitChange();
