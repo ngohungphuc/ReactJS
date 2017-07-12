@@ -3,7 +3,7 @@
  * @Author: Tony Hudson
  * @Contact: github.com/ngohungphuc
  * @Last Modified By: Tony Hudson
- * @Last Modified Time: Jul 11, 2017 11:39 PM
+ * @Last Modified Time: Jul 12, 2017 9:03 PM
  * @Description: Modify Here, Please
  */
 
@@ -41,8 +41,10 @@ var AuthorStore = assign({}, EventEmitter.prototype, {
 
 Dispatcher.register(function (action) {
     switch (action.actionTypes) {
-        case
-            ActionTypes.CREATE_AUTHOR:
+        case ActionTypes.INITIALIZE:
+            _authors = action.initialData.authors;
+            AuthorStore.emitChange();
+        case ActionTypes.CREATE_AUTHOR:
             _authors.push(action.atuhor);
             AuthorStore.emitChange();
             break;

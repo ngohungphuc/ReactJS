@@ -3,7 +3,7 @@
  * @Author: Tony Hudson
  * @Contact: github.com/ngohungphuc
  * @Last Modified By: Tony Hudson
- * @Last Modified Time: Jul 11, 2017 11:07 PM
+ * @Last Modified Time: Jul 12, 2017 8:44 PM
  * @Description: Modify Here, Please
  */
 
@@ -11,4 +11,4 @@
 
 var keyMirror = require('react/lib/keyMirror');
 
-module.exports = keyMirror({CREATE_AUTHOR: null});
+module.exports = keyMirror({INITIALIZE:null, CREATE_AUTHOR: null});
