@@ -10,4 +10,4 @@ and return new state
 + 4/React will be re-render and connect to store using react redux
 
 
-![ReduxFlow](reduxflow.png)
+![ReduxFlow](reduxflow.PNG)
