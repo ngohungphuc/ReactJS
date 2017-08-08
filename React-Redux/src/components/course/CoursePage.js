@@ -1,5 +1,6 @@
 import React, { PropType } from "react";
-
+import { connect } from "react-redux";
+import * as courseActions from "../../actions/courseActions";
 class CoursesPage extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -7,7 +8,7 @@ class CoursesPage extends React.Component {
     this.state = {
       course: { title: "" }
     };
-    
+
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onclickSave = this.onclickSave.bind(this);
   }
@@ -19,8 +20,7 @@ class CoursesPage extends React.Component {
   }
 
   onclickSave() {
-    alert(`Saving ${this.state.course.title}`);
-    debugger;
+    this.props.dispatch(courseActions.createCourse(this.state.course));
   }
   render() {
     return (
@@ -39,4 +39,10 @@ class CoursesPage extends React.Component {
   }
 }
 
-export default CoursesPage;
+const mapStateToProps = (state, ownProps) => {
+  //access state in redux store
+  return {
+    courses: state.courses
+  };
+};
+export default connect(mapStateToProps)(CoursesPage);
