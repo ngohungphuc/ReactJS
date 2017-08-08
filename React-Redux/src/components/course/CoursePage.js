@@ -1,4 +1,4 @@
-import React, { PropType } from "react";
+import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 import * as courseActions from "../../actions/courseActions";
 class CoursesPage extends React.Component {
@@ -22,10 +22,19 @@ class CoursesPage extends React.Component {
   onclickSave() {
     this.props.dispatch(courseActions.createCourse(this.state.course));
   }
+
+  courseRow(course, index) {
+    return (
+      <div key={index}>
+        {course.title}
+      </div>
+    );
+  }
   render() {
     return (
       <div>
         <h1>Course</h1>
+        {this.props.courses.map(this.courseRow)}
         <h2>Add courses</h2>
         <input
           type="text"
@@ -33,11 +42,17 @@ class CoursesPage extends React.Component {
           value={this.state.course.title}
         />
 
-        <input type="submit" value="Submit" onClick={this.onClickSave} />
+        <input type="submit" value="Submit" onClick={this.onclickSave} />
       </div>
     );
   }
 }
+
+CoursesPage.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  courses: PropTypes.array.isRequired
+};
+
 
 const mapStateToProps = (state, ownProps) => {
   //access state in redux store
