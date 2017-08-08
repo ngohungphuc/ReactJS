@@ -20,7 +20,7 @@ class CoursesPage extends React.Component {
   }
 
   onclickSave() {
-    this.props.dispatch(courseActions.createCourse(this.state.course));
+    this.props.createCourse(this.state.course);
   }
 
   courseRow(course, index) {
@@ -49,15 +49,21 @@ class CoursesPage extends React.Component {
 }
 
 CoursesPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  courses: PropTypes.array.isRequired
+  courses: PropTypes.array.isRequired,
+  createCourse: PropTypes.func.isRequired
 };
 
-
-const mapStateToProps = (state, ownProps) => {
+function mapStateToProps(state, ownProps) {
   //access state in redux store
   return {
     courses: state.courses
   };
-};
-export default connect(mapStateToProps)(CoursesPage);
+}
+
+//determine what action available in component
+function mapDispatchToProps(dispatch) {
+  return {
+    createCourse: course => dispatch(courseActions.createCourse(course))
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
