@@ -1,5 +1,5 @@
 export default {
-  articleList: response => {
+  articlesList: response => {
     return {
       type: "ARTICLES_LIST_ADD",
       payload: { response: response }
