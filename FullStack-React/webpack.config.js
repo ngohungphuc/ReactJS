@@ -1,7 +1,7 @@
 module.exports = {
   entry: ["babel-polyfill", "./src/app.js"],
   output: {
-    path: __dirname + "./dist",
+    path: "./dist",
     filename: "app.js",
     publicPath: "/"
   },
@@ -13,7 +13,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /.js$/,
+        test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
         loader: "babel",
         query: {

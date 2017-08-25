@@ -3,6 +3,8 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import falcor from 'falcor';
+import falcorExpress from 'falcor-express';
 mongoose.connect("mongodb://localhost/local");
 
 const articleSchema = {

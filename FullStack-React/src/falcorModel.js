@@ -17,7 +17,7 @@ let cache = {
 };
 
 const model = new falcor.Model({
-  cache: cache
+  'cache': cache
 });
 
 export default model;
