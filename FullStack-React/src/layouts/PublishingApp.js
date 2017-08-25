@@ -3,7 +3,7 @@
  */
 import React from "react";
 import { connect } from "react-redux";
-
+import falcorModel from "../falcorModel.js";
 const mapStateToProps = state => ({
   ...state
 });
@@ -13,6 +13,24 @@ const mapDispatchToProps = dispatch => ({});
 class PublishingApp extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  componentWillMount() {
+    this._fetch();
+  }
+
+  async _fetch() {
+    const articlesLength = await falcorModel
+      .getValue("articles.length")
+      .then(length => length);
+
+    const articles = await falcorModel
+      .get([
+        "articles",
+        { from: 0, to: articlesLength - 1 },
+        ["id", "articleTitle", "articleContent"]
+      ])
+      .then(articleResponse => articleResponse.json.articles);
   }
 
   render() {
@@ -32,7 +50,7 @@ class PublishingApp extends React.Component {
 
       articlesJSX.push(currentArticleJSX);
     }
-    
+
     return (
       <div>
         <h1>Our publishing app</h1>
