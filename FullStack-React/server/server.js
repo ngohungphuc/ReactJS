@@ -15,7 +15,7 @@ app.use(cors());
 // This is required by falcor-express middleware
 //to work correctly with falcor-browser
 app.use(bodyParser.json({ extended: false }));
-
+app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(
   "/model.json",
